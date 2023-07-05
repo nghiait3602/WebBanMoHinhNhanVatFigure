@@ -1,0 +1,64 @@
+﻿@model WebShop.Models.CreateAccountViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<link href="~/Content/assets/styles/main_styles.css" rel="stylesheet" />
+<main aria-labelledby="title" style="margin-top:200px; margin-left:50px;">
+    <div class="container">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="row">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                </div>
+            </div>
+            <input type="hidden" value="Khách Hàng" name="Role" />
+            <div class="row">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-10">
+                    <input type="submit" value="Tạo tài khoản" class="btn btn-outline-dark newsletter_submit_btn trans_300" />
+                </div>
+            </div>
+        }
+
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

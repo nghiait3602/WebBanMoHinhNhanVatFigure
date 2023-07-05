@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebShop.Models.ShoppingCartItem>
+@using WebShop.Models.Commons
+<style>
+    .table-css {
+        border: 1px solid #fe4c50;
+        border-radius: 10px;
+        margin-top: 36px;
+        color: #fe4c50;
+        width:350px;
+    }
+    .hover-td{
+        cursor:pointer;
+    }
+    .hover-tr:hover {
+        border-radius: 10px;
+        background-color: #f55d61e6;
+        color: black;
+        transition: 0.3s ease;
+        opacity:0.7;
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+    <div>
+        <h3>GIỎ HÀNG <small style="float:right;">@Model.Count()</small></h3>
+
+    </div>
+    var i = 0;
+    var tongtien = decimal.Zero;
+    <div class="table-css">
+        <table style="width: 100%;" class="table">
+
+
+            @foreach (var item in Model)
+            {
+                tongtien += item.TotalPrice;
+                <tr class="hover-tr">
+                    <td class="hover-td">@item.ProductName</td>
+                    <td class="hover-td"> @Format.FormatNumber(item.Price, 0)</td>
+                </tr>
+
+            }
+            <tr>
+                <td>
+                    Tổng tiền
+                </td>
+                <td>
+                    @Format.FormatNumber(tongtien, 0)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+else
+{
+
+
+
+}
+
+
+

@@ -1,0 +1,46 @@
+﻿@model WebShop.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<link href="~/Content/assets/styles/main_styles.css" rel="stylesheet" />
+
+<main aria-labelledby="title" style="margin-top:100px;">
+    <h2 id="title">@ViewBag.Title.</h2>
+    <h3> @ViewBag.LoginProvider Tài Khoản.</h3>
+
+    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p class="text-info">
+            Bạn đã xác thực thành công với <strong>@ViewBag.LoginProvider</strong>
+            Mời bạn điền Email và Tài Khoản
+
+        </p>
+        <div class="row">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 col-form-label" })
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-2 col-md-10">
+                <input type="submit" class="btn btn-outline-dark newsletter_submit_btn trans_300" value="Đăng ký" />
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

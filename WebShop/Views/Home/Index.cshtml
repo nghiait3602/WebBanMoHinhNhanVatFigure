@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Slider -->
+<link href="~/Content/assets/styles/main_styles.css" rel="stylesheet" />
+
+<div class="main_slider">
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+            <li data-target="#demo" data-slide-to="3"></li>
+        </ul>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Content/assets/images/slide1.png" alt="Los Angeles">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="container fill_height">
+                        <div class="row align-items-center fill_height">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/assets/images/slide2.png" alt="Los Angeles">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="container fill_height">
+                        <div class="row align-items-center fill_height">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/assets/images/slide3.png" alt="Los Angeles">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="container fill_height">
+                        <div class="row align-items-center fill_height">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/assets/images/slide4.png" alt="Los Angeles">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="container fill_height">
+                        <div class="row align-items-center fill_height">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+
+</div>
+@*<div class="main_slider" style="background-image:url(/Content/assets/images/slider_1.jpg)">
+        <div class="container fill_height">
+            <div class="row align-items-center fill_height">
+                <div class="col">
+                    <div class="main_slider_content">
+                        <h6>Spring / Summer Collection 2017</h6>
+                        <h1>Get up to 30% Off New Arrivals</h1>
+                        <div class="red_button shop_now_button"><a href="#">shop now</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@Html.Action("MenuProductCategory", "Menu")
+
+<!-- New Arrivals -->
+
+<div class="new_arrivals">
+    <div class="container">
+        @Html.Action("MenuArrivals", "Menu")
+    </div>
+</div>
+
+<!-- Deal of the week -->
+
+<div class="deal_ofthe_week" style="background-image: url(/Content/assets/images/top-phim-hoat-hinh-3d-trung-quoc-2022-1672130007.jpg) ; background-size: cover; background-repeat: no-repeat; ">
+    <div class="container">
+        <div class="row align-items-center">
+        
+            <div class="col-lg-6">
+                <div class="deal_ofthe_week_img">
+
+                </div>
+            </div>
+            <div class="col-lg-6 text-right deal_ofthe_week_col">
+                <div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
+                    <div class="section_title" style="backdrop-filter:blur(10px) ; ">
+                        <h2 style=" color: white;"><strong>Giao Dịch Trong Tuần</strong></h2>
+                    </div>
+                    <ul class="timer">
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="day" class="timer_num">03</div>
+                            <div class="timer_unit">Ngày</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="hour" class="timer_num">15</div>
+                            <div class="timer_unit">Giờ</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="minute" class="timer_num">45</div>
+                            <div class="timer_unit">Phút</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="second" class="timer_num">23</div>
+                            <div class="timer_unit">Giây</div>
+                        </li>
+                    </ul>
+                    <div class="red_button deal_ofthe_week_button">
+                        <a href="/san-pham">Cửa Hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Best Sellers -->
+
+@Html.Action("Partial_ProductSale", "Products")
+<!-- Benefit -->
+
+
+<!-- Blogs -->
+
+@Html.Action("Partial_News_Home", "News");

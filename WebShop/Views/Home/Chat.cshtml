@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<link href="~/Content/assets/styles/main_styles.css" rel="stylesheet" />
+<!-- Select2 -->
+<link rel="stylesheet" href="~/Content/Clients/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/Content/Clients/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="~/Content/Clients/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- BS Stepper -->
+<link rel="stylesheet" href="~/Content/Clients/plugins/bs-stepper/css/bs-stepper.min.css">
+<!-- dropzonejs -->
+<link rel="stylesheet" href="~/Content/Clients/plugins/dropzone/min/dropzone.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/Clients/dist/css/adminlte.min.css">
+
+
+
+@if (!Request.IsAuthenticated)
+{
+    <div class="card direct-chat direct-chat-primary" style="margin-top:200px;">
+  <div class="red_button ">
+        <a href="/Account/Login">
+            Đăng Nhập
+        </a>
+    </div>
+    </div>
+  
+}
+else
+{
+    <div class="card direct-chat direct-chat-primary" style="margin-top:200px;">
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="direct-chat-messages"  id="message">
+
+            </div>
+
+        </div>
+
+
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <form action="#" method="post">
+                <div class="input-group" id="divchat">
+                    <input type="text" name="message" id="txtMessage" placeholder="Gửi tin nhắn..." class="form-control">
+                    <span class="input-group-append">
+                        <button type="button" id="btnSend" class="btn btn-primary">Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <button type="button" id="btnLogChat" class="btn btn-primary">Login</button>
+    </div>
+    <input type="hidden" id="txtName" value="@User.Identity.Name" />
+    <input type="hidden" id="hName" />
+
+
+
+}
+
+<!-- /.card-footer-->
+
+<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
+
+@section scripts{
+    <script>
+        function show() {
+            $('#btnLogChat').hide();
+            $('#divchat').show();
+        }
+        function hide() {
+            $('#divchat').hide();
+            $('#btnLogChat').show();
+        }
+        $(function () {
+            $('#divchat').hide();
+            var chat = $.connection.Chat;
+            console.log(chat);
+            loadClient(chat);
+            $.connection.hub.start().done(function () {
+                $('#btnLogChat').click(function () {
+                    var name = $('#txtName').val();
+                    chat.server.connect(name);
+                    show();
+                });
+                $('#btnSend').click(function () {
+                    var name = $('#hName').val();
+                    var msg = $('#txtMessage').val();
+                    chat.server.message(name, msg);
+                    $('#txtMessage').val('').focus();
+                })
+            });
+        });
+        function loadClient(chat) {
+            chat.client.message = function (name, msg) {
+                if (name == "admin") {
+
+                    $('#message').append(`  <div class="direct-chat-msg right" id="contenMessage"><div class="direct-chat-text">` + "<strong> " + name + ":</strong>" + msg + `</div> </div>`);
+
+
+                }
+                else if (name != "admin") {
+
+
+
+                    $('#message').append(`  <div class="direct-chat-msg" ><div class="direct-chat-text">` + "<strong> " + name + ":</strong>" + msg + `</div></div>`);
+
+
+                }
+            }
+            chat.client.connect = function (name) {
+                $('#hName').val(name);
+            }
+        }
+    </script>
+
+
+
+
+}
